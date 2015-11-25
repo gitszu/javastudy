@@ -20,7 +20,7 @@ import java.io.PrintWriter;
  */
 public class Duplication {
 	public static void main(String[] args) {
-
+		listFiles(new File("E:\\学习文档"));
 	}
 
 	/**
@@ -75,5 +75,31 @@ public class Duplication {
 			s = in.readLine();
 		}
 
+	}
+
+	/**
+	 * recursive display the file of current folder
+	 * 
+	 * @param dir
+	 *            initial directory
+	 */
+	public static void listFiles(File dir) {
+		if (!dir.exists() || !dir.isDirectory()) // guard clause
+			return;
+
+		String[] files = dir.list();// get all files
+		/**
+		 * loop all files ,if it is a file then display the file name, else
+		 * recursive this directory
+		 */
+		for (int i = 0; i < files.length; i++) {
+			File file = new File(dir, files[i]);
+			if(file.isFile()){
+				System.out.println(dir + "\\" + file.getName());
+			} else {
+				System.out.println(dir + "\\" + file.getName());
+				listFiles(file);
+			}
+		}
 	}
 }
